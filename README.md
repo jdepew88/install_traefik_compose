@@ -1,7 +1,7 @@
 
 # Traefik Installation Script (docker compose) (DNS provider: cloudflare)
 
-This repository contains scripts and configuration files to automate the installation and setup of Traefik 2.6, following IBRACORP's tutorial. The scripts will configure Traefik to use Cloudflare as the DNS provider for external services. Follow the steps below to configure and run the automation scripts.  Link:  https://docs.ibracorp.io/traefik/master/docker-compose
+This repository contains a script and configuration files to automate the installation and setup of Traefik 2.6, following IBRACORP's tutorial. The scripts will configure Traefik to use Cloudflare as the DNS provider for external services. Follow the steps below to configure and run the automation scripts.  Link:  https://docs.ibracorp.io/traefik/master/docker-compose
 
 ## Prerequisites
 
