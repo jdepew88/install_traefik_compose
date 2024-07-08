@@ -1,7 +1,7 @@
 
-# Traefik with Cloudflare DNS Automation
+# Traefik Installation Script (docker compose) (DNS provider: cloudlfare)
 
-This repository contains scripts and configuration files to automate the installation and setup of Traefik 2.6, following IBRACORP's tutorial. The scripts will configure Traefik to use Cloudflare as the DNS provider for external services. Follow the steps below to configure and run the automation scripts.
+This repository contains scripts and configuration files to automate the installation and setup of Traefik 2.6, following IBRACORP's tutorial. The scripts will configure Traefik to use Cloudflare as the DNS provider for external services. Follow the steps below to configure and run the automation scripts.  Link:  https://docs.ibracorp.io/traefik/master/docker-compose
 
 ## Prerequisites
 
@@ -20,7 +20,7 @@ git clone https://github.com/jdepew88/install_traefik_compose.git
 cd install_traefik_compose
 ```
 
-### 2. Configure Environment Variables
+### 2. Configure Environment Variables (sample in repo - .env)
 
 Create a `.env` file in the root directory of the repository with the following content:
 
@@ -40,27 +40,11 @@ Replace `your_cloudflare_api_token`, `your_cloudflare_zone_id`, and `your-domain
 
 ### 3. Run the Setup Script
 
-#### For Unraid
-
-Navigate to the Traefik appdata directory:
+Make the `setup_traefik_docker_compose.sh` script executable and run it:
 
 ```bash
-cd /mnt/user/appdata/traefik
-```
-
-#### For Docker Compose
-
-Navigate to the Traefik appdata directory:
-
-```bash
-cd /opt/appdata/traefik
-```
-
-Make the `setup_and_run.sh` script executable and run it:
-
-```bash
-chmod +x setup_and_run.sh
-./setup_and_run.sh
+chmod +x setup_traefik_docker_compose.sh
+./setup_traefik_docker_compose.sh
 ```
 
 ### 4. Start Traefik with Docker Compose
@@ -71,7 +55,7 @@ Finally, start Traefik using Docker Compose:
 docker-compose up -d
 ```
 
-### How the Service Runs
+### How to add services with update_traefik_and_cloudflare (find in this repo)
 
 When you run the script, it will ask you three questions:
 
@@ -119,15 +103,11 @@ Based on your inputs, the script will:
 
 ### Purpose
 
-The purpose of this repository is to automate the setup and management of Traefik for external services, using Cloudflare as the DNS provider. This helps in managing the DNS records efficiently and ensures that your services are correctly exposed through Traefik.
+The purpose of this repository is to automate the setup and management of Traefik for external services, using Cloudflare as the DNS provider. This helps in installing traefik per the instructions provided by YouTuber IBRACORP using docker compose.
 
 ### How It Works
 
-- The `setup_and_run.sh` script prepares the host environment, sets up Traefik, and configures it to work with Cloudflare.
-- The script creates a Python virtual environment, installs the required packages, and runs the `update_traefik_and_cloudflare.py` script.
-- The `update_traefik_and_cloudflare.py` script updates the Traefik dynamic configuration file with the new service and router entries, creates a backup of the original configuration, and adds a CNAME record to Cloudflare for the new service.
-
-By following these steps, you can efficiently manage your Traefik configuration and DNS settings with Cloudflare.
+- The `setup_traefik_docker_compose.sh` script prepares the host environment, sets up Traefik, and has the configuration files to work with Cloudflare.
 
 ## Contributing
 
