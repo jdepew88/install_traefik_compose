@@ -32,6 +32,10 @@ git clone https://github.com/jdepew88/install_traefik_compose.git
 cp -r install_traefik_compose/traefik/* .
 rm -rf install_traefik_compose
 
-echo "Traefik initial setup for Docker Compose completed. Please run 'docker compose up -d complete the setup after you edit the .env file."
+# Notify the user to edit the .env file
+echo "Please edit the .env file with your specific details, such as Cloudflare API token, domain name, and email."
+
+# Notify the user to complete the setup by running docker compose up
+echo "Traefik initial setup for Docker Compose completed. Please run 'docker compose up -d' to complete the setup after you edit the .env file."
 
 echo "Credit: This script is based on instructions from IBRACORP. For more details, visit: https://docs.ibracorp.io/traefik/master/docker-compose"
