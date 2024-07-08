@@ -25,18 +25,12 @@ cd install_traefik_compose
 Edit the `.env` file in the root directory of the repository with the following content:
 
 ```dotenv
-# Cloudflare configuration
-CLOUDFLARE_API_TOKEN=your_cloudflare_api_token
-CLOUDFLARE_ZONE_ID=your_cloudflare_zone_id
-
-# Your main domain
-DOMAIN_NAME=your-domain.com
-
-# Config file path
-CONFIG_FILE_PATH=/opt/appdata/traefik/config.yml
+DOMAIN_NAME=yourdomain.com
+EMAIL=your_email@example.com
+TRAEFIK_CF_DNS_API_TOKEN=your_cloudflare_api_token
 ```
 
-Replace `your_cloudflare_api_token`, `your_cloudflare_zone_id`, and `your-domain.com` with your actual Cloudflare API token, zone ID, and domain name, respectively.
+Replace `your_cloudflare_api_token`, 'your_email@example.com' and `yourdomain.com` with your actual Cloudflare API token, email address, and domain name, respectively.
 
 ### 3. Run the Setup Script
 
