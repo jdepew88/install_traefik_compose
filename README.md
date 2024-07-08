@@ -20,9 +20,9 @@ git clone https://github.com/jdepew88/install_traefik_compose.git
 cd install_traefik_compose
 ```
 
-### 2. Configure Environment Variables (sample in repo - .env)
+### 2. Configure Environment Variables (update .env)
 
-Create a `.env` file in the root directory of the repository with the following content:
+Edit the `.env` file in the root directory of the repository with the following content:
 
 ```dotenv
 # Cloudflare configuration
@@ -55,9 +55,9 @@ Finally, start Traefik using Docker Compose:
 docker-compose up -d
 ```
 
-### How to add services with update_traefik_and_cloudflare (find in this repo)
+### How to add services with update_traefik_and_cloudflare
 
-When you run the script, it will ask you three questions:
+When you run the script found at https://github.com/jdepew88/update_traefik_and_cloudflare, it will ask you three questions:
 
 1. **Enter the name of your service:** 
    - This is the name you want to use for your new service.
@@ -107,7 +107,7 @@ The purpose of this repository is to automate the setup and management of Traefi
 
 ### How It Works
 
-- The `setup_traefik_docker_compose.sh` script prepares the host environment, sets up Traefik, and has the configuration files to work with Cloudflare.
+- The `setup_traefik_docker_compose.sh` script prepares the host environment, sets up Traefik, and has the configuration files prepated from traefik to work with Cloudflare.
 
 ## Contributing
 
