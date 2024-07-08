@@ -32,6 +32,6 @@ git clone https://github.com/jdepew88/install_traefik_compose.git
 cp -r install_traefik_compose/traefik/* .
 rm -rf install_traefik_compose
 
-echo "Traefik initial setup for Docker Compose completed. Please run the next script to complete the setup."
+echo "Traefik initial setup for Docker Compose completed. Please run 'docker compose up -d complete the setup after you edit the .env file."
 
 echo "Credit: This script is based on instructions from IBRACORP. For more details, visit: https://docs.ibracorp.io/traefik/master/docker-compose"
