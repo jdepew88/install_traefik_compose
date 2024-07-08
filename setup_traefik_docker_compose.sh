@@ -32,6 +32,12 @@ git clone https://github.com/jdepew88/install_traefik_compose.git
 cp -r install_traefik_compose/traefik/* .
 rm -rf install_traefik_compose
 
+# Prompt user for domain name
+read -p "Enter your domain name (e.g., example.com): " DOMAIN_NAME
+
+# Update traefik.yml with the provided domain name
+sed -i "s/your-domain.com/$DOMAIN_NAME/g" /opt/appdata/traefik/traefik.yml
+
 # Notify the user to edit the .env file
 echo "Please edit the .env file with your specific details, such as Cloudflare API token, domain name, and email."
 
