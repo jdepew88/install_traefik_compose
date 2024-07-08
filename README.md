@@ -20,7 +20,16 @@ git clone https://github.com/jdepew88/install_traefik_compose.git
 cd install_traefik_compose
 ```
 
-### 2. Configure Environment Variables (update .env)
+### 2. Run the Setup Script
+
+Make the `setup_traefik_docker_compose.sh` script executable and run it:
+
+```bash
+chmod +x setup_traefik_docker_compose.sh
+./setup_traefik_docker_compose.sh
+```
+
+### 3. Configure Environment Variables (update /opt/appdata/traefik/.env)
 
 Edit the `.env` file in the root directory of the repository with the following content:
 
@@ -31,15 +40,6 @@ TRAEFIK_CF_DNS_API_TOKEN=your_cloudflare_api_token
 ```
 
 Replace `your_cloudflare_api_token`, 'your_email@example.com' and `yourdomain.com` with your actual Cloudflare API token, email address, and domain name, respectively.
-
-### 3. Run the Setup Script
-
-Make the `setup_traefik_docker_compose.sh` script executable and run it:
-
-```bash
-chmod +x setup_traefik_docker_compose.sh
-./setup_traefik_docker_compose.sh
-```
 
 ### 4. Start Traefik with Docker Compose
 
