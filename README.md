@@ -29,6 +29,8 @@ chmod +x setup_traefik_docker_compose.sh
 ./setup_traefik_docker_compose.sh
 ```
 
+The script will prompt you for your domain name and update traefik.yml (static config file).
+
 ### 3. Configure Environment Variables (update /opt/appdata/traefik/.env)
 
 Edit the `.env` file in the root directory of the repository with the following content:
