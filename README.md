@@ -48,6 +48,12 @@ Your host IP address is actually only in one place in the dynamic config file (c
 
 ### 3. Configure Environment Variables (update /opt/appdata/traefik/.env)
 
+cd into the traefik directory the script just made. Then use nano to edit the .env (if you ls files, use ls -a to see .env - hidden file)
+```
+cd /opt/appdata/traefik
+nano .env
+```
+
 Edit the `.env` file in the root directory of the repository with the following content:
 
 ```dotenv
