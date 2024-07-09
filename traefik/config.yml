@@ -51,7 +51,7 @@ http:
       loadBalancer:
         passHostHeader: true
         servers:
-          - url: http://10.10.0.8:32400/
+          - url: http://10.10.0.156:32400/
 
 tls:
   options:
