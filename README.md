@@ -3,6 +3,17 @@
 
 This repository contains a script and configuration files to automate the installation and setup of Traefik 2.6, following IBRACORP's tutorial. The scripts will configure Traefik to use Cloudflare as the DNS provider for external services. Follow the steps below to configure and run the automation scripts.  Link:  https://docs.ibracorp.io/traefik/master/docker-compose
 
+## Explanation
+
+### Purpose
+
+The purpose of this repository is to automate the setup and management of Traefik for external services, using Cloudflare as the DNS provider. This helps in installing traefik per the instructions provided by YouTuber IBRACORP using docker compose.
+Link to IBRACORP's instructions for Traefik 2.6 using Docker Compse.  https://docs.ibracorp.io/traefik/master/docker-compose
+
+### How It Works
+
+- The `setup_traefik_docker_compose.sh` script prepares the host environment, sets up Traefik, and has the configuration files prepated from traefik to work with Cloudflare.
+
 ## Prerequisites
 
 - Docker and Docker Compose installed
@@ -29,19 +40,20 @@ chmod +x setup_traefik_docker_compose.sh
 ./setup_traefik_docker_compose.sh
 ```
 
-The script will prompt you for your domain name and update traefik.yml (static config file).
+The script will prompt you for your **domain name**.  Please enter like this: yourdomain.com
+Your domain name will be updated where necessary in the traefik appdata files (traefik.yml, config.yml, and docker-compose.yml).
 
 ### 3. Configure Environment Variables (update /opt/appdata/traefik/.env)
 
 Edit the `.env` file in the root directory of the repository with the following content:
 
 ```dotenv
-DOMAIN_NAME=yourdomain.com
 EMAIL=your_email@example.com
 TRAEFIK_CF_DNS_API_TOKEN=your_cloudflare_api_token
 ```
 
-Replace `your_cloudflare_api_token`, 'your_email@example.com' and `yourdomain.com` with your actual Cloudflare API token, email address, and domain name, respectively.
+Replace `your_cloudflare_api_token` and 'your_email@example.com' with your actual Cloudflare API token and the email address associated with Cloudflare.
+There is a section below describing how to Obtain a Cloudflare API Token.
 
 ### 4. Start Traefik with Docker Compose
 
@@ -50,60 +62,44 @@ Finally, start Traefik using Docker Compose:
 ```bash
 docker-compose up -d
 ```
+### 5. Start to Use Traefik to Access Local Services Remotely
 
-### How to add services with update_traefik_and_cloudflare
+You will find the Traefik dashboard accessible at http://your-host-ip:8083. (Port 8083 is used instead of the default 8080, as 8080 is a common port that other containers may be using.)
 
-When you run the script found at https://github.com/jdepew88/update_traefik_and_cloudflare, it will ask you three questions:
+Refer to IBRACORP's instructions for adding services using Docker Labels. Otherwise, see config.yml for a template Router and Service pair for adding services manually.
 
-1. **Enter the name of your service:** 
-   - This is the name you want to use for your new service.
-   - Example: `plex`
+Refer to **update_traefik_and_cloudflare** (link: https://github.com/jdepew88/update_traefik_and_cloudflare) for a script to automate the process of adding services to Traefik's dynamic config (config.yml) and automatically adding CNAME records in Cloudflare.
 
-2. **Enter the IP address of `<service_name>`:**
-   - This is the IP address and port where your service is running.
-   - Example: `10.10.0.100:32800`
+### DNS and Port Forwarding Configuration
+You will need to configure your DNS records with Cloudflare. For further information on setting up A and CNAME records in Cloudflare or using a Cloudflare tunnel, refer to IBRACORP's documentation.
 
-3. **Enter the scheme (http or https) for the service:**
-   - This specifies whether your service uses HTTP or HTTPS.
-   - Example: `http`
+Additionally, you will need to set your router to use NAT/Port Forwarding. Note: HTTP and HTTPS requests to your server will come in on WAN ports 80 and 443. You will need to set your redirect target IP to your Traefik Host IP and the redirect ports to 8001 and 44301 for use with this script.
 
-Based on your inputs, the script will:
-- Create a new router entry in the Traefik configuration for the service.
-- Create a new service entry in the Traefik configuration pointing to the specified IP address and scheme.
-- Update the configuration file and create a backup.
-- Add a CNAME record to Cloudflare to point to your main domain.
+You can always edit the Docker Compose file before running docker-compose up -d to change ports. For example, you can change ports to 443:443 and 80:80 if you prefer a simpler NAT configuration.
 
-## Obtaining a Cloudflare API Token and Setting Up Zone Settings
 
-### Step 1: Create a Cloudflare API Token
+## Obtaining a Cloudflare API Token for Let's Encrypt
 
-1. Log in to your Cloudflare account.
-2. Navigate to the "My Profile" page by clicking on your profile icon in the top right corner and selecting "My Profile".
-3. Click on the "API Tokens" tab.
-4. Click on the "Create Token" button.
-5. Use the "Edit zone DNS" template under the "API Token Templates" section.
-6. Configure the token with the necessary permissions:
-   - Zone: DNS: Edit
-7. Click "Continue to summary", review the token settings, and then click "Create Token".
-8. Copy the generated API token and store it securely. You'll need it for the `.env` file.
+1. **Log in to Cloudflare**:
+   - Go to [Cloudflare](https://www.cloudflare.com) and log in to your account.
 
-### Step 2: Configure Zone Settings
+2. **Navigate to API Tokens**:
+   - Click on your profile icon in the top right corner and select **My Profile**.
+   - In the left sidebar, click on **API Tokens**.
 
-1. Log in to your Cloudflare account and go to the "Dashboard".
-2. Select your domain from the list of zones.
-3. Navigate to the "DNS" tab.
-4. Ensure that the domain is using Cloudflare's nameservers.
-5. Make sure your domain's DNS settings are properly configured to use Cloudflare's DNS services.
+3. **Create a New API Token**:
+   - Click on the **Create Token** button.
+   - Use the **Edit zone DNS** template.
 
-## Explanation
+4. **Configure the Token**:
+   - Under **Zone Resources**, select **Include** > **Specific zone** > choose your domain.
+   - Under **Permissions**, set **Zone** > **DNS** > **Edit**.
 
-### Purpose
+5. **Create and Copy the Token**:
+   - Give your token a name (e.g., "Let's Encrypt DNS Token").
+   - Click **Continue to summary**, review the settings, and click **Create Token**.
+   - Copy the generated API token and store it securely.
 
-The purpose of this repository is to automate the setup and management of Traefik for external services, using Cloudflare as the DNS provider. This helps in installing traefik per the instructions provided by YouTuber IBRACORP using docker compose.
-
-### How It Works
-
-- The `setup_traefik_docker_compose.sh` script prepares the host environment, sets up Traefik, and has the configuration files prepated from traefik to work with Cloudflare.
 
 ## Contributing
 
