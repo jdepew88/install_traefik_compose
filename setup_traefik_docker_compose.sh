@@ -29,19 +29,22 @@ chmod 600 /opt/appdata/traefik/acme.json
 echo "Downloading and extracting files from the GitHub repository..."
 cd /opt/appdata/traefik
 git clone https://github.com/jdepew88/install_traefik_compose.git
-cp -r install_traefik_compose/traefik/* .
+cp -r install_traefik_compose/traefik/* /opt/appdata/traefik/
+cp -r install_traefik_compose/traefik/.* /opt/appdata/traefik/  # Copy hidden files including .env
 rm -rf install_traefik_compose
 
 # Prompt user for domain name
 read -p "Enter your domain name (e.g., example.com): " DOMAIN_NAME
 
-# Update traefik.yml with the provided domain name
-sed -i "s/your-domain.com/$DOMAIN_NAME/g" /opt/appdata/traefik/traefik.yml
+# Update traefik.yml, docker-compose.yml, and config.yml with the provided domain name
+sed -i "s/\${DOMAIN_NAME}/$DOMAIN_NAME/g" /opt/appdata/traefik/traefik.yml
+sed -i "s/\${DOMAIN_NAME}/$DOMAIN_NAME/g" /opt/appdata/traefik/docker-compose.yml
+sed -i "s/\${DOMAIN_NAME}/$DOMAIN_NAME/g" /opt/appdata/traefik/config.yml
 
 # Notify the user to edit the .env file
 echo "Please edit the .env file with your specific details, such as Cloudflare API token, domain name, and email."
 
 # Notify the user to complete the setup by running docker compose up
-echo "Traefik initial setup for Docker Compose completed. Please run 'docker compose up -d' to complete the setup after you edit the .env file."
+echo "Traefik initial setup for Docker Compose completed. Please run 'docker-compose up -d' to complete the setup after you edit the .env file."
 
 echo "Credit: This script is based on instructions from IBRACORP. For more details, visit: https://docs.ibracorp.io/traefik/master/docker-compose"
