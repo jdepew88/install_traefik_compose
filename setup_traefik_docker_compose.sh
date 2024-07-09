@@ -42,7 +42,7 @@ sed -i "s/\${DOMAIN_NAME}/$DOMAIN_NAME/g" /opt/appdata/traefik/docker-compose.ym
 sed -i "s/\${DOMAIN_NAME}/$DOMAIN_NAME/g" /opt/appdata/traefik/config.yml
 
 # Notify the user to edit the .env file
-echo "Please edit the .env file with your specific details, such as Cloudflare API token, domain name, and email."
+echo "Please edit the .env file with your specific details, such as Cloudflare API token and email."
 
 # Notify the user to complete the setup by running docker compose up
 echo "Traefik initial setup for Docker Compose completed. Please run 'docker-compose up -d' to complete the setup after you edit the .env file."
