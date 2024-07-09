@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Prompt user for domain name
+read -p "Enter your domain name (e.g., example.com): " DOMAIN_NAME
+
+# Prompt user for host IP address
+read -p "Enter your host IP address (e.g., 10.10.0.100): " HOST_IP_ADDRESS
+
 # Update package list and upgrade the system
 echo "Updating package list and upgrading the system..."
 sudo apt update && sudo apt upgrade -y
@@ -33,13 +39,13 @@ cp -r install_traefik_compose/traefik/* /opt/appdata/traefik/
 cp -r install_traefik_compose/traefik/.* /opt/appdata/traefik/  # Copy hidden files including .env
 rm -rf install_traefik_compose
 
-# Prompt user for domain name
-read -p "Enter your domain name (e.g., example.com): " DOMAIN_NAME
-
 # Update traefik.yml, docker-compose.yml, and config.yml with the provided domain name
 sed -i "s/\${DOMAIN_NAME}/$DOMAIN_NAME/g" /opt/appdata/traefik/traefik.yml
 sed -i "s/\${DOMAIN_NAME}/$DOMAIN_NAME/g" /opt/appdata/traefik/docker-compose.yml
 sed -i "s/\${DOMAIN_NAME}/$DOMAIN_NAME/g" /opt/appdata/traefik/config.yml
+
+# Update config.yml with the provided host IP address
+sed -i "s/\${HOST_IP_ADDRESS}/$HOST_IP_ADDRESS/g" /opt/appdata/traefik/config.yml
 
 # Notify the user to edit the .env file
 echo "Please edit the .env file with your specific details, such as Cloudflare API token and email."
