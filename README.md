@@ -43,6 +43,9 @@ chmod +x setup_traefik_docker_compose.sh
 The script will prompt you for your **domain name**.  Please enter like this: yourdomain.com
 Your domain name will be updated where necessary in the traefik appdata files (traefik.yml, config.yml, and docker-compose.yml).
 
+The script will then prompt you for your **host ip address**.  Please enter like this: 10.10.0.100 (without http://)
+Your host IP address is actually only in one place in the dynamic config file (config.yml) wherein it points to sample Plex container at HOST_IP_ADDRESS:32400
+
 ### 3. Configure Environment Variables (update /opt/appdata/traefik/.env)
 
 Edit the `.env` file in the root directory of the repository with the following content:
@@ -51,7 +54,6 @@ Edit the `.env` file in the root directory of the repository with the following 
 EMAIL=your_email@example.com
 TRAEFIK_CF_DNS_API_TOKEN=your_cloudflare_api_token
 ```
-
 Replace `your_cloudflare_api_token` and 'your_email@example.com' with your actual Cloudflare API token and the email address associated with Cloudflare.
 There is a section below describing how to Obtain a Cloudflare API Token.
 
