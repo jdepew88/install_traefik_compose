@@ -45,7 +45,7 @@ sed -i "s/\${DOMAIN_NAME}/$DOMAIN_NAME/g" /opt/appdata/traefik/docker-compose.ym
 sed -i "s/\${DOMAIN_NAME}/$DOMAIN_NAME/g" /opt/appdata/traefik/config.yml
 
 # Update config.yml with the provided host IP address
-sed -i "s/\${HOST_IP_ADDRESS}/$HOST_IP_ADDRESS/g" /opt/appdata/traefik/config.yml
+sed -i "s/HOST_IP_ADDRESS/$HOST_IP_ADDRESS/g" /opt/appdata/traefik/config.yml
 
 # Notify the user to edit the .env file
 echo "Please edit the .env file with your specific details, such as Cloudflare API token and email."
