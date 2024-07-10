@@ -46,6 +46,9 @@ Your domain name will be updated where necessary in the traefik appdata files (t
 The script will then prompt you for your **host ip address**.  Please enter like this: 10.10.0.100 (without http://)
 Your host IP address is actually only in one place in the dynamic config file (config.yml) wherein it points to sample Plex container at HOST_IP_ADDRESS:32400
 
+The script will then prompt you for your **email address**.  Please enter like this: youremail@example.com
+This is the email address associated with your Cloudflare account.
+
 ### 3. Configure Environment Variables (update /opt/appdata/traefik/.env)
 
 cd into the traefik directory the script just made. Then use nano to edit the .env (if you ls files, use ls -a to see .env - hidden file)
@@ -57,11 +60,10 @@ nano .env
 Edit the `.env` file in the root directory of the repository with the following content:
 
 ```dotenv
-EMAIL=your_email@example.com
 TRAEFIK_CF_DNS_API_TOKEN=your_cloudflare_api_token
 ```
-Replace `your_cloudflare_api_token` and 'your_email@example.com' with your actual Cloudflare API token and the email address associated with Cloudflare.
-There is a section below describing how to Obtain a Cloudflare API Token.
+Replace `your_cloudflare_api_token` with your actual Cloudflare API token.
+There is a section below describing how to obtain a Cloudflare API Token.
 
 ### 4. Start Traefik with Docker Compose
 
