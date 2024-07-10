@@ -4,8 +4,8 @@ services:
     container_name: traefik
     image: traefik:2.6
     ports:
-      - "8001:80"     # Map external port 8001 to internal port 80
-      - "44301:443"   # Map external port 44301 to internal port 443
+      - "80:80"     # Map external port 8001 to internal port 80
+      - "443:443"   # Map external port 44301 to internal port 443
       - "8083:8080"  # Dashboard port (optional)
     volumes:
       - /opt/appdata/traefik/:/etc/traefik/
