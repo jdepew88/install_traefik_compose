@@ -6,6 +6,9 @@ read -p "Enter your domain name (e.g., example.com): " DOMAIN_NAME
 # Prompt user for host IP address
 read -p "Enter your host IP address (e.g., 10.10.0.100): " HOST_IP_ADDRESS
 
+# Prompt user for email address
+read -p "Enter your email address (e.g., user@example.com): " EMAIL
+
 # Update package list and upgrade the system
 echo "Updating package list and upgrading the system..."
 sudo apt update && sudo apt upgrade -y
@@ -43,6 +46,9 @@ rm -rf install_traefik_compose
 sed -i "s/\${DOMAIN_NAME}/$DOMAIN_NAME/g" /opt/appdata/traefik/traefik.yml
 sed -i "s/\${DOMAIN_NAME}/$DOMAIN_NAME/g" /opt/appdata/traefik/docker-compose.yml
 sed -i "s/\${DOMAIN_NAME}/$DOMAIN_NAME/g" /opt/appdata/traefik/config.yml
+
+# Update traefik.yml with the provided email address
+sed -i "s/\${EMAIL}/$EMAIL/g" /opt/appdata/traefik/traefik.yml
 
 # Update config.yml with the provided host IP address
 sed -i "s/HOST_IP_ADDRESS/$HOST_IP_ADDRESS/g" /opt/appdata/traefik/config.yml
