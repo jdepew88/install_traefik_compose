@@ -9,6 +9,7 @@ services:
       - "8183:8080"  # Dashboard port (optional)
     volumes:
       - /opt/appdata/traefik/:/etc/traefik/
+      - /var/run/docker.sock:/var/run/docker.sock:ro # Ensure direct socket access (if needed)
     networks:
       - proxy # rename this to your custom docker network
     labels:
@@ -18,7 +19,7 @@ services:
       traefik.http.routers.api.service: api@internal
       traefik.enable: true
     environment:
-      DOCKER_HOST: dockersocket
+      DOCKER_HOST: tcp://dockersocket:2375  # Ensure Traefik points to the docker socket proxy
       CF_DNS_API_TOKEN: ${CF_DNS_API_TOKEN}
     restart: unless-stopped
     depends_on:
@@ -27,6 +28,8 @@ services:
   dockersocket:
     container_name: dockersocket
     image: tecnativa/docker-socket-proxy
+    ports:
+      - "2375:2375"  # Expose docker socket proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
