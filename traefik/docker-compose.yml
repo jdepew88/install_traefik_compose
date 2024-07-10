@@ -4,18 +4,19 @@ services:
     container_name: traefik
     image: traefik:2.6
     ports:
-      - "80:80"     # Map external port 8001 to internal port 80
-      - "443:443"   # Map external port 44301 to internal port 443
+      - "80:80"
+      - "443:443"
       - "8083:8080"  # Dashboard port (optional)
     volumes:
       - /opt/appdata/traefik/:/etc/traefik/
     networks:
       - proxy # rename this to your custom docker network
     labels:
-      traefik.http.routers.api.rule: Host(`traefik.${DOMAIN_NAME}`)    # Define the subdomain for the traefik dashboard.
-      traefik.http.routers.api.entryPoints: https    # Set the Traefik entry point.
-      traefik.http.routers.api.service: api@internal    # Enable Traefik API.
-      traefik.enable: true   # Enable Traefik reverse proxy for the Traefik dashboard.
+      # Labels for Traefik Dashboard
+      traefik.http.routers.api.rule: Host(`traefik.${DOMAIN_NAME}`)
+      traefik.http.routers.api.entryPoints: https
+      traefik.http.routers.api.service: api@internal
+      traefik.enable: true
     environment:
       DOCKER_HOST: dockersocket
       CF_DNS_API_TOKEN: ${CF_DNS_API_TOKEN}
