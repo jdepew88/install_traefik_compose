@@ -72,7 +72,7 @@ docker-compose up -d
 ```
 ### 5. Start to Use Traefik to Access Local Services Remotely
 
-You will find the Traefik dashboard accessible at http://your-host-ip:8083. (Port 8083 is used instead of the default 8080, as 8080 is a common port that other containers may be using.)
+You will find the Traefik dashboard accessible at http://your-host-ip:8183. (Port 8183 is used instead of the default 8080, as 8080 is a common port that other containers may be using.)
 
 Refer to IBRACORP's instructions for adding services using Docker Labels. Otherwise, see config.yml for a template Router and Service pair for adding services manually.
 
